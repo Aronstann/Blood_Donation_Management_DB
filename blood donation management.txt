@@ -1,0 +1,277 @@
+create table BloodBank( 
+    BloodBank_ID Number(10), 
+    BloodBank_Name Varchar2(20), 
+    City Varchar2(20), 
+    Contact Number(15), 
+    constraint BloodBank_ID Primary Key(BloodBank_ID)  
+    )
+
+create table Donor( 
+    Donor_ID Number(10) , 
+    Name Varchar(20), 
+    Age Number(3), 
+    Gender Varchar2(20), 
+    Blood_Type Varchar2(5), 
+    Contact_Details Varchar(20), 
+    BloodBank_ID Number(10), 
+    constraint Donor_ID Primary Key(Donor_ID),  
+    Foreign Key(BloodBank_ID) References BloodBank(BloodBank_ID)  
+)
+
+create table Donation( 
+    Donation_ID Number(10) , 
+    Date_Of_Donation Date, 
+    Amount_Donated Number(2), 
+    Donor_ID Number(10), 
+ 
+    constraint Donation_ID Primary Key(Donation_ID),  
+    Foreign Key(Donor_ID) References Donor(Donor_ID)  
+)
+
+create table Patient( 
+    Patient_ID Number(10) , 
+    Name Varchar2(20), 
+    Age Number(3), 
+    Gender Varchar2(10), 
+    Blood_Type Varchar2(3), 
+    Contact_Details Varchar2(20), 
+ 
+    constraint Patient_ID Primary Key(Patient_ID) 
+ 
+)
+
+create table  Transfusion( 
+     
+    Transfusion_ID Number(10) , 
+    Date_Of_Transfusion Date, 
+    Transfusion_Amount Number(2), 
+    Patient_ID Number(10), 
+ 
+    constraint Transfusion_ID Primary Key(Transfusion_ID),  
+    Foreign Key(Patient_ID) References Patient(Patient_ID) 
+)
+
+create table  Blood( 
+     
+    Blood_ID Number(10) , 
+    Usability Varchar2(10), 
+    Donation_ID Number(10), 
+    Transfusion_ID Number(10), 
+    
+ 
+    constraint Blood_ID Primary Key(Blood_ID),  
+    Foreign Key(Donation_ID) References Donation(Donation_ID), 
+    Foreign Key(Transfusion_ID) References Transfusion(Transfusion_ID) 
+)
+
+
+
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+
+insert into Patient(Patient_ID,Name,Age,Gender,Blood_Type,Contact_Details)
+Values(173,'Omar alhalabi',23,'M','O+','583025649');
+
+insert into Patient(Patient_ID,Name,Age,Gender,Blood_Type,Contact_Details)
+Values(174,'Yamen Alom',26,'M','O-','5396024581');
+
+
+insert into Patient(Patient_ID,Name,Age,Gender,Blood_Type,Contact_Details)
+Values(175,'Aous Yasser',22,'M','A+','5068394251');
+
+insert into Patient(Patient_ID,Name,Age,Gender,Blood_Type,Contact_Details)
+Values(176,'Omar khaled',22,'M','AB+','5089642351');
+
+insert into Patient(Patient_ID,Name,Age,Gender,Blood_Type,Contact_Details)
+Values(177,'lara malki',30,'F','B+','5073428569');
+
+insert into Patient(Patient_ID,Name,Age,Gender,Blood_Type,Contact_Details)
+Values(178,'sarah ahmed',28,'F','A-','5021483965');
+
+
+------------------------------------------------------------------------------------------------
+
+
+insert into Donor(Donor_ID,Name,Age,Gender,Blood_Type,Contact_Details,BloodBank_ID)
+Values(301,'Abass almasri',25,'M','O-','5031962847',1337);
+
+insert into Donor(Donor_ID,Name,Age,Gender,Blood_Type,Contact_Details,BloodBank_ID)
+Values(302,'Ahmad fahad',37,'M','A-','5098124367',1442);
+
+
+insert into Donor(Donor_ID,Name,Age,Gender,Blood_Type,Contact_Details,BloodBank_ID)
+Values(303,'Layla hana',28,'F','AB-','5217436980',9821);
+
+insert into Donor(Donor_ID,Name,Age,Gender,Blood_Type,Contact_Details,BloodBank_ID)
+Values(304,'Fatima Salma',34,'F','B+','5372946180',7631);
+
+insert into Donor(Donor_ID,Name,Age,Gender,Blood_Type,Contact_Details,BloodBank_ID)
+Values(305,'Lina Yasmin',25,'F','O+','5291748360',5432);
+
+insert into Donor(Donor_ID,Name,Age,Gender,Blood_Type,Contact_Details,BloodBank_ID)
+Values(306,'Jamal Sami',22,'M','B-','5503128469',4421);
+
+
+------------------------
+
+
+insert into BloodBank(BloodBank_ID,BloodBank_Name,City,Contact)
+Values(1337,'Lifeline ','Evergreen City','5874639210');
+
+insert into BloodBank(BloodBank_ID,BloodBank_Name,City,Contact)
+Values(1442,'Crimson Flow ','Silver Ridge','5928374610');
+
+
+insert into BloodBank(BloodBank_ID,BloodBank_Name,City,Contact)
+Values(9821,'VitalGift ','Oceanview','5639148275');
+
+insert into BloodBank(BloodBank_ID,BloodBank_Name,City,Contact)
+Values(7631,'Hemocare ','Mount Vista','5486972310');
+
+insert into BloodBank(BloodBank_ID,BloodBank_Name,City,Contact)
+Values(5432,'PulsePoint','Starlight Town','5036781429');
+
+insert into BloodBank(BloodBank_ID,BloodBank_Name,City,Contact)
+Values(4421,'RedDrop ','Crescent Bay','5674890321');
+
+
+
+
+
+----------------------
+
+insert into Transfusion(Transfusion_ID , Date_of_transfusion , 	Transfusion_amount , Patient_ID)
+values(100 , '24-MARCH-23' , 4 , 173);
+insert into Transfusion(Transfusion_ID , Date_of_transfusion , Transfusion_amount , Patient_ID)
+values(101 , '24-MARCH-23' , 2 , 174);
+insert into Transfusion(Transfusion_ID , Date_of_transfusion , Transfusion_amount , Patient_ID)
+values(102 , '24-MARCH-25' , 1 , 176);
+insert into Transfusion(Transfusion_ID , Date_of_transfusion , Transfusion_amount , Patient_ID)
+values(103 , '24-APRIL-3' , 2 , 175);
+insert into Transfusion(Transfusion_ID , Date_of_transfusion , Transfusion_amount , Patient_ID)
+values(104 , '24-MAY-22' , 4 , 177);
+insert into Transfusion(Transfusion_ID , Date_of_transfusion , Transfusion_amount , Patient_ID)
+values(105 , '24-MAY-27' , 2 , 178);
+insert into Transfusion(Transfusion_ID , Date_of_transfusion , Transfusion_amount , Patient_ID)
+values(106 , '24-MAY-27' , 3 , 173);
+insert into Transfusion(Transfusion_ID , Date_of_transfusion , Transfusion_amount , Patient_ID)
+values(107 , '24-JUNE-1' , 1 , 174);
+
+
+
+
+------------------------
+insert into Blood(Blood_ID , Usability , Donation_ID , Transfusion_ID)
+values(1 , 'N' , 1000 , 105);
+
+insert into Blood(Blood_ID , Usability , Donation_ID , Transfusion_ID)
+values(2 , 'N' , 1001 , 105);
+
+insert into Blood(Blood_ID , Usability , Donation_ID , Transfusion_ID)
+values(3 , 'Y' , 1002 , NULL);
+
+insert into Blood(Blood_ID , Usability , Donation_ID , Transfusion_ID)
+values(4 , 'Y' , 1002 , NULL);
+
+insert into Blood(Blood_ID , Usability , Donation_ID , Transfusion_ID)
+values(5 , 'N' , 1007 , 107);
+
+insert into Blood(Blood_ID , Usability , Donation_ID , Transfusion_ID)
+values(6 , 'N' , 1003 , 102;
+
+
+
+---------------------------
+insert into Donation(Donation_ID , Date_of_donation , Amount_donated , Donor_ID)
+values(1000 , '24-FEBRUARY-29' , 4 , 301);
+insert into Donation(Donation_ID , Date_of_donation , Amount_donated , Donor_ID)
+values(1001 , '24-MARCH-22' , 2 , 302);
+insert into Donation(Donation_ID , Date_of_donation , Amount_donated , Donor_ID)
+values(1002 , '24-MARCH-23' , 1 , 303);
+insert into Donation(Donation_ID , Date_of_donation , Amount_donated , Donor_ID)
+values(1003 , '24-APRIL-3' , 2 , 304);
+insert into Donation(Donation_ID , Date_of_donation , Amount_donated , Donor_ID)
+values(1004 , '24-MAY-2' , 4 , 301);
+insert into Donation(Donation_ID , Date_of_donation , Amount_donated , Donor_ID)
+values(1005 , '24-MAY-27' , 2 , 305);
+insert into Donation(Donation_ID , Date_of_donation , Amount_donated , Donor_ID)
+values(1006 , '24-MAY-27' , 3 , 306);
+insert into Donation(Donation_ID , Date_of_donation , Amount_donated , Donor_ID)
+values(1007 , '24-JUNE-3' , 1 , 303);
+
+
+Queries 
+1)aggeraite
+select count(Donor_ID) as Number_of_Donors from Donor
+Select AVG(Amount_Donated) as Average_Donation from Donation;
+
+2) order by 
+Select Name,Age from Patient order by Age ASC;
+
+3)where
+select BloodBank_ID,BloodBank_Name from BloodBank where city='Evergreen City';
+
+4)group by 
+select count(Donor_ID),Gender From Donor Group by Gender;
+
+5)Join query
+select Donor.Blood_Type,
+Donation.Amount_Donated,
+Blood.Usability 
+From Donation 
+Join Donor
+ON Donation.Donor_ID=Donor.Donor_ID
+Join Blood
+ON Donation.Donation_ID=Blood.Donation_ID
+Order by Donor.Donor_ID;
+
+6)subquery 
+select Transfusion_ID ,Date_of_transfusion,Transfusion_amount 
+from transfusion 
+where Transfusion_amount > (select AVG(Transfusion_amount)from transfusion);
+
+-------------------------------------
+CREATE OR REPLACE PROCEDURE Find_BloodType_Donors(required_BloodType IN VARCHAR2)
+AS
+BEGIN
+    FOR Donor_temp IN (SELECT Donor.Donor_ID, Donor.Name, Donor.Blood_Type 
+                       FROM Donor 
+                       WHERE Donor.Blood_Type = required_BloodType)
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('Donor_ID: ' || Donor_temp.Donor_ID || '   Name: ' || Donor_temp.Name || '   BloodType: ' || Donor_temp.Blood_Type);
+    END LOOP;
+END Find_BloodType_Donors;
+
+
+
+---------------
+CREATE OR REPLACE PROCEDURE BloodUsability(
+    p_UpdatedUsability Blood.Usability%TYPE,
+    p_Blood_ID         Blood.Blood_ID%TYPE,
+    p_Transfusion_ID Transfusion.Transfusion_ID%TYPE)
+AS
+BEGIN
+    
+    UPDATE Blood 
+    SET Usability = p_UpdatedUsability 
+    WHERE Blood_ID = p_Blood_ID;
+
+    
+    UPDATE Blood 
+    SET Transfusion_ID = p_Transfusion_ID
+    WHERE Blood_ID = p_Blood_ID;
+
+    COMMIT;
+END BloodUsability;
+
+exec Bloodusability('Y',3,NULL)
+
+
